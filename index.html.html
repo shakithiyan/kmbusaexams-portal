@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KMBUSA | Pilot Exam SPA Portal</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#003366',
+            accent: '#007bff',
+            surface: '#f8fafc',
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            outfit: ['Outfit', 'sans-serif'],
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+            'slide-up': 'slideUp 0.6s ease-out forwards',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/css">
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .glass-effect {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .active-nav {
+      border-bottom: 3px solid #007bff;
+      color: #007bff !important;
+    }
+
+    #splash {
+      transition: clip-path 1.2s cubic-bezier(0.8, 0, 0.2, 1);
+      clip-path: circle(150% at 50% 50%);
+    }
+    #splash.hide { clip-path: circle(0% at 50% 50%); }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f1f1; }
+    ::-webkit-scrollbar-thumb { background: #003366; border-radius: 10px; }
+  </style>
+</head>
+<body class="bg-slate-50 font-outfit text-slate-800">
+
+  <div id="splash" class="fixed inset-0 z-[9999] bg-white flex items-center justify-center">
+    <div class="text-center animate-pulse">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYHbrqEegUN2m6QuS_MP80cGuqtEgD3qqngA&s" class="w-32 h-32 rounded-full border-4 border-primary p-1 mx-auto mb-6">
+      <h1 class="font-cinzel text-4xl text-primary font-black tracking-widest">KMBUSA</h1>
+      <p class="text-accent tracking-[0.3em] font-light mt-2 uppercase">Pilot Exam Portal 2026</p>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-50 glass-effect border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <a href="#" onclick="Router.navigate('home')" class="flex items-center gap-3">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYHbrqEegUN2m6QuS_MP80cGuqtEgD3qqngA&s" class="w-10 h-10 rounded-full">
+        <span class="font-cinzel font-bold text-xl text-primary hidden md:block">KMBUSA</span>
+      </a>
+      
+      <nav class="flex gap-2 md:gap-8">
+        <button data-link="home" onclick="Router.navigate('home')" class="font-semibold text-slate-600 hover:text-primary transition-colors py-2 px-1">Register</button>
+        <button data-link="about" onclick="Router.navigate('about')" class="font-semibold text-slate-600 hover:text-primary transition-colors py-2 px-1">About Us</button>
+        <button data-link="admin" onclick="Router.navigate('admin-login')" class="bg-primary text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-blue-900/20 hover:bg-accent transition-all">Admin Panel</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="spa-viewport" class="max-w-5xl mx-auto px-6 py-12 min-h-[70vh]"></main>
+
+  <footer class="bg-white border-t border-slate-200 py-12 px-6 mt-20">
+    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 text-center md:text-left">
+      <div>
+        <h4 class="font-cinzel text-primary font-bold mb-4">Support & Coordination</h4>
+        <div class="flex flex-col md:flex-row gap-8 justify-center md:justify-start">
+          <div class="border-l-4 border-accent pl-4">
+            <p class="text-xs text-slate-400 uppercase font-bold">President KMBUSA 2026</p>
+            <p class="font-bold text-lg">Iynkaran</p>
+            <a href="tel:+94776240570" class="text-accent font-semibold">+94 77 624 0570</a>
+          </div>
+          <div class="border-l-4 border-accent pl-4">
+            <p class="text-xs text-slate-400 uppercase font-bold">Secretary KMBUSA 2026</p>
+            <p class="font-bold text-lg">Sarangan</p>
+            <a href="tel:+94766990842" class="text-accent font-semibold">+94 76 699 0842</a>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center md:items-end">
+        <p class="text-sm text-slate-400">© 2026 Kilinochchi Maths Bio University Students' Association</p>
+        <p class="text-xs mt-2 font-medium bg-slate-100 text-slate-500 px-3 py-1 rounded-full">Non-Profit Educational Organization</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSfjR4igVdE3vDsvhCFtHkCZuQYGSxbHLzGhNOTHt6Qyi-klnECkr7WWu6qxOqAl0uew/exec";
+
+    const Store = {
+      state: {
+        registrations: JSON.parse(localStorage.getItem('kmbusa_v4') || '[]'),
+        activePage: 'home'
+      },
+      
+      saveToLocal() {
+        localStorage.setItem('kmbusa_v4', JSON.stringify(this.state.registrations));
+      },
+
+      addRegistration(data) {
+        this.state.registrations.push({...data, id: Date.now(), status: 'pending', date: new Date().toLocaleDateString()});
+        this.saveToLocal();
+        this.notify();
+      },
+
+      updateStatus(id, newStatus) {
+        this.state.registrations = this.state.registrations.map(r => r.id === id ? {...r, status: newStatus} : r);
+        this.saveToLocal();
+        this.notify();
+      },
+
+      delete(id) {
+        this.state.registrations = this.state.registrations.filter(r => r.id !== id);
+        this.saveToLocal();
+        this.notify();
+      },
+
+      notify() { Router.render(); }
+    };
+
+    const Router = {
+      routes: {
+        home: () => `
+          <div class="bg-white rounded-3xl p-8 md:p-12 shadow-2xl shadow-slate-200 animate-slide-up border border-slate-100">
+            <div class="mb-10">
+              <h2 class="font-cinzel text-3xl text-primary font-black mb-2">Pilot Exam Registration</h2>
+              <p class="text-slate-500 font-medium">A/L Students 2026 Batch - Kilinochchi District</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="md:col-span-2">
+                <label class="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">Full Name (முழுப் பெயர்)</label>
+                <input type="text" id="reg-name" placeholder="Enter your full name" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-3 focus:border-accent focus:bg-white outline-none transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">NIC Number</label>
+                <input type="text" id="reg-nic" placeholder="National Identity Card" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-3 focus:border-accent focus:bg-white outline-none transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">Phone Number</label>
+                <input type="text" id="reg-phone" placeholder="07xxxxxxxx" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-3 focus:border-accent focus:bg-white outline-none transition-all">
+              </div>
+              <div>
+                <label class="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">Stream (பாடப்பிரிவு)</label>
+                <select id="reg-stream" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-3 focus:border-accent focus:bg-white outline-none transition-all appearance-none">
+                  <option value="Biology">Biology (உயிரியல்)</option>
+                  <option value="Combined Maths">Combined Maths (கணிதம்)</option>
+                </select>
+              </div>
+              <div>
+                <label class="text-xs font-bold text-primary uppercase tracking-wider mb-2 block">Gender</label>
+                <select id="reg-gender" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-3 focus:border-accent focus:bg-white outline-none transition-all appearance-none">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+            </div>
+            
+            <button id="submit-btn" onclick="Actions.handleRegister()" class="w-full mt-10 bg-primary text-white font-bold py-4 rounded-xl shadow-xl shadow-blue-900/20 hover:bg-accent hover:-translate-y-1 transition-all">SUBMIT REGISTRATION</button>
+          </div>
+        `,
+        about: () => `
+          <div class="bg-white rounded-3xl p-8 md:p-12 shadow-xl animate-slide-up border border-slate-100">
+            <h2 class="font-cinzel text-3xl text-primary font-black mb-8 border-l-8 border-accent pl-6">About KMBUSA</h2>
+            <p class="text-lg leading-relaxed text-slate-600 mb-10 text-justify">
+              Kilinochchi Maths Bio University Students' Association (KMBUSA) என்பது கிளிநொச்சி மாவட்டத்தைச் சேர்ந்த பல்கலைக்கழக மாணவர்களால் நடத்தப்படும் ஒரு இலாப நோக்கற்ற கல்வி அமைப்பாகும். 
+            </p>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100"><h4 class="font-bold text-primary mb-3">Pilot Exams</h4><p class="text-sm text-slate-600">மாதிரி வினாத்தாள்களை நடத்துதல்.</p></div>
+              <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100"><h4 class="font-bold text-primary mb-3">Academic Guidance</h4><p class="text-sm text-slate-600">கற்றல் வழிகாட்டல்கள் வழங்குதல்.</p></div>
+              <div class="bg-blue-50 p-6 rounded-2xl border border-blue-100"><h4 class="font-bold text-primary mb-3">Counseling</h4><p class="text-sm text-slate-600">எதிர்காலத் தொழில்துறையைத் தேர்வு செய்ய உதவுதல்.</p></div>
+            </div>
+          </div>
+        `,
+        success: () => `
+          <div class="text-center py-20 animate-slide-up">
+            <div class="w-24 h-24 bg-green-500 text-white text-5xl rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-green-200">✓</div>
+            <h2 class="font-cinzel text-4xl text-primary font-black mb-4">Successfully Registered!</h2>
+            <p class="text-slate-500 text-lg mb-10">Your application has been recorded in our cloud database.</p>
+            <button onclick="Router.navigate('home')" class="bg-primary text-white px-10 py-4 rounded-xl font-bold shadow-lg hover:bg-accent transition-all">Go Back</button>
+          </div>
+        `,
+        'admin-login': () => `
+          <div class="max-w-md mx-auto bg-white rounded-3xl p-10 shadow-2xl animate-slide-up border border-slate-100 mt-10">
+            <h3 class="text-2xl font-cinzel text-primary font-bold text-center mb-8">Admin Access</h3>
+            <input type="password" id="admin-pass" class="w-full bg-slate-50 border-2 border-slate-100 rounded-xl px-4 py-3 outline-none focus:border-accent transition-all text-center mb-6">
+            <button onclick="Actions.adminLogin()" class="w-full bg-primary text-white font-bold py-4 rounded-xl hover:bg-accent transition-all">Login</button>
+          </div>
+        `,
+        'admin-dash': () => {
+          const regs = Store.state.registrations;
+          return `
+            <div class="animate-slide-up">
+              <h2 class="font-cinzel text-3xl text-primary font-black mb-8">Management Console</h2>
+              <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100">
+                <table class="w-full text-left border-collapse">
+                  <thead class="bg-slate-50 border-b border-slate-100">
+                    <tr>
+                      <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Student Name</th>
+                      <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider">Stream</th>
+                      <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-slate-100">
+                    ${regs.length === 0 ? '<tr><td colspan="3" class="px-6 py-20 text-center text-slate-400">No local registrations</td></tr>' : 
+                      regs.map(r => `
+                        <tr class="hover:bg-slate-50/50">
+                          <td class="px-6 py-4"><p class="font-bold text-slate-700">${r.name}</p></td>
+                          <td class="px-6 py-4"><span class="bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase">${r.stream}</span></td>
+                          <td class="px-6 py-4 text-right"><button onclick="Store.delete(${r.id})" class="text-red-500 text-xs font-bold">Delete</button></td>
+                        </tr>
+                      `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `;
+        }
+      },
+
+      navigate(route) {
+        Store.state.activePage = route;
+        this.render();
+        window.scrollTo(0, 0);
+      },
+
+      render() {
+        const viewport = document.getElementById('spa-viewport');
+        const viewFunc = this.routes[Store.state.activePage];
+        viewport.innerHTML = viewFunc ? viewFunc() : '<h1>View not found</h1>';
+        document.querySelectorAll('[data-link]').forEach(btn => {
+          btn.classList.toggle('active-nav', btn.getAttribute('data-link') === Store.state.activePage);
+        });
+      }
+    };
+
+    const Actions = {
+      async handleRegister() {
+        const btn = document.getElementById('submit-btn');
+        const data = {
+          name: document.getElementById('reg-name').value,
+          nic: document.getElementById('reg-nic').value,
+          phone: document.getElementById('reg-phone').value,
+          stream: document.getElementById('reg-stream').value,
+          gender: document.getElementById('reg-gender').value
+        };
+
+        if(!data.name || !data.nic) return alert("Please fill in required fields.");
+
+        // Visual Feedback
+        btn.innerText = "SENDING DATA...";
+        btn.disabled = true;
+        btn.classList.add('opacity-50', 'cursor-not-allowed');
+
+        try {
+          await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(data)
+          });
+          
+          Store.addRegistration(data);
+          Router.navigate('success');
+        } catch (error) {
+          alert("Network error. Please check your connection.");
+          btn.innerText = "SUBMIT REGISTRATION";
+          btn.disabled = false;
+          btn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      },
+
+      adminLogin() {
+        if(document.getElementById('admin-pass').value === 'admin123') Router.navigate('admin-dash');
+        else alert("Unauthorized Access");
+      }
+    };
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('splash').classList.add('hide');
+        Router.render();
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
